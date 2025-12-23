@@ -3313,7 +3313,7 @@ hr {
 .product-sidebar-section .product-sorting-section .product-sorting span {
   font-size: 1.3rem;
 }
-@media (max-width:768px) {
+@media (max-width:767px) {
   .product-sidebar-section .product-sorting-section {
     padding: 1rem;
   }
