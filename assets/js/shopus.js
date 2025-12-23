@@ -2,48 +2,31 @@
 AOS.init();
 
 
-
-// header-top-options-------------------------------
+// header-top-options (country / language select box)
 function selectBoxHandler(selector) {
   const countryTop = document.querySelector(`#${selector}`);
-  const selectBoxBody = document.querySelector(`#${selector} .slectbox-body`);
-  if (selectBoxBody.style.display === "none") {
+  if (!countryTop) return;
+
+  const selectBoxBody = countryTop.querySelector(".slectbox-body");
+  if (!selectBoxBody) return;
+
+  if (selectBoxBody.style.display === "none" || selectBoxBody.style.display === "") {
     selectBoxBody.style.display = "block";
-    if (countryTop) {
-      let countryOption = countryTop.querySelectorAll(".all-option"),
-        countryBtn_text = countryTop.querySelector(".item-text");
-      countryOption.forEach((option) => {
-        option.addEventListener("click", () => {
-          let selectedOption = option.querySelector(".item-text").innerText;
-          // countrybtn-text
-          countryBtn_text.innerHTML = selectedOption;
-          selectBoxBody.style.display = "none";
-        });
-      });
-    }
+
+    let countryOption = countryTop.querySelectorAll(".all-option");
+    let countryBtn_text = countryTop.querySelector(".item-text");
+
+    countryOption.forEach((option) => {
+      option.onclick = () => {
+        let selectedOption = option.querySelector(".item-text").innerText;
+        countryBtn_text.innerHTML = selectedOption;
+        selectBoxBody.style.display = "none";
+      };
+    });
   } else {
     selectBoxBody.style.display = "none";
   }
 }
-
-// category submenu---------------------------------
-let submenu = document.getElementById("subMenu");
-let empt = document.querySelector(".empty");
-
-function tooglmenu() {
-  submenu.classList.toggle("open-dropdown");
-  empt.classList.toggle("active");
-}
-
-// additional heights for submenu
-function heightanimation(ele) {
-  const els = document.querySelectorAll(`#${ele}`);
-  els.forEach((item) => {
-    const height = item.scrollHeight;
-    item.style.setProperty("--max-height", `${height}px`);
-  });
-}
-heightanimation("subMenu");
 
 // hero-swiper-------------------------------------
 var swiper = new Swiper(".hero-swiper", {
